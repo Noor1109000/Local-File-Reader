@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Local File Reader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id="output">Complete Javascript Course</div>
+    <input type="file" multiple onchange="upFiles(this.files)">
+    <div id="message"></div>
+
+    <script> 
+        var message = document.getElementById('message');
+        if(window.FileReader){
+            message.innerHTML =  "file reader is available";
+        }
+        else{
+            message.innerHTML = "file reader Not available";
+        }
+
+        function upFiles(files){
+            for(var x=0;x<files.length;x++){
+                var fReader = new FileReader();
+                var fileName = files[x].name;
+                console.log(fReader);
+                fReader.onload = function(e){
+                   message.innerHTML += '<br>'+fileName;
+                    message.innerHTML += '<br>'+e.target.result;
+
+                }
+                
+                fReader.readAsText(files[x]);
+            }
+        }
+    </script>
+</body>
+</html>
